@@ -4,7 +4,7 @@
     "main": "src/app.ts",
     "license": "AGPL-3.0-only",
     "scripts": {
-        "build": "ts-node ./scripts/build.ts",
+        "build": "ts-node ./script/build.ts",
         "dev": "nodemon ./src/app.ts"
     },
     "devDependencies": {

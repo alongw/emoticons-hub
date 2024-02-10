@@ -7,6 +7,7 @@ import logger from './log'
 let dirs: string[] = null
 
 try {
+    !fse.existsSync('./data') && fse.mkdirSync('./data')
     const files = fse.readdirSync('./data')
     // 过滤掉文件 只需要文件夹
     dirs = files.filter((file) => fse.statSync(`./data/${file}`).isDirectory())
@@ -18,14 +19,18 @@ export const getImgHash = () => {
     if (!dirs) {
         return []
     }
-    const hashList = dirs.map((dir) => {
-        return {
-            dir: dir,
-            hash: CryptoJS.MD5(dir).toString()
-        }
-    })
+    try {
+        const hashList = dirs.map((dir) => {
+            return {
+                dir: dir,
+                hash: CryptoJS.MD5(dir).toString()
+            }
+        })
 
-    return hashList
+        return hashList
+    } catch (error) {
+        return []
+    }
 }
 
 export const getImgList = (hash: string) => {
@@ -52,15 +57,22 @@ export const getImgList = (hash: string) => {
         }
     }
 
-    // 读取文件夹下的所有文件
-    const files = fse.readdirSync(`./data/${target.dir}`)
+    try {
+        // 读取文件夹下的所有文件
+        const files = fse.readdirSync(`./data/${target.dir}`)
 
-    return {
-        status: 1,
-        data: {
-            fileList: files,
-            dir: target.dir,
-            hash: target.hash
+        return {
+            status: 1,
+            data: {
+                fileList: files,
+                dir: target.dir,
+                hash: target.hash
+            }
+        }
+    } catch (error) {
+        return {
+            status: -1,
+            msg: 'Can not find the target folder.'
         }
     }
 }

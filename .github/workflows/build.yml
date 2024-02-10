@@ -1,0 +1,45 @@
+name: Build
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+
+            - name: Build web
+              run: |
+                  cd ./web
+                  yarn install
+                  yarn build
+                  cd ..
+
+            - name: Build service
+              run: |
+                  cd ./service
+                  yarn install
+                  yarn build
+                  cd ..
+
+            - name: Upload web
+              uses: actions/upload-artifact@v3
+              with:
+                  name: web
+                  path: ./web/dist/out
+
+            - name: Upload service
+              uses: actions/upload-artifact@v3
+              with:
+                  name: web
+                  path: ./service/dist/out
