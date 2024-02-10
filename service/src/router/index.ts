@@ -8,7 +8,7 @@ import { getImgList } from './../utils/getImg'
 const router = Router()
 
 // 传递哈希值，解析目录下的文件
-router.get('/', async (req, res) => {
+router.get('/getImgList', async (req, res) => {
     if (!req.query.hash) {
         return res.send({
             status: 400,

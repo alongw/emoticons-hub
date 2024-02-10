@@ -30,6 +30,25 @@ hashList.forEach((e) => {
     app.use(`${config.baseUrl}/file/${e.hash}`, express.static(`./data/${e.dir}`))
 })
 
+app.all(config.baseUrl, (req, res) => {
+    res.send({
+        status: 200,
+        msg: 'Emoticons Hub Service is running. | https://github.com/alongw/emoticons-hub | https://alongw.cn/',
+        data: {
+            author: 'ALONGW',
+            github: 'https://github.com/alongw/emoticons-hub',
+            webSize: 'https://alongw.cn/'
+        }
+    })
+})
+
+app.all('*', (req, res) => {
+    res.status(404).send({
+        status: 404,
+        msg: 'Not Found.'
+    })
+})
+
 app.listen(config.port, () => {
     logger.info(`Emoticons Hub Service is running at http://localhost:${config.port}`)
 })
