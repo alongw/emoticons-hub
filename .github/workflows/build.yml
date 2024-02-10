@@ -36,7 +36,7 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                   name: web
-                  path: ./web/dist/out
+                  path: ./web/dist
 
             - name: Upload service
               uses: actions/upload-artifact@v3
