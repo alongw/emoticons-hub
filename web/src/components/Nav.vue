@@ -6,7 +6,7 @@ defineOptions({
 
 <template>
   <div class="nav">
-    <nav>Emoticons-Hub</nav>
+    <nav @click="$router.push('/')">Emoticons-Hub</nav>
     <div class="button-group">
       <a href="https://github.com/alongw/emoticons-hub" target="_blank">Github</a>
     </div>
@@ -30,6 +30,8 @@ defineOptions({
     font-size: 24px;
     font-weight: bold;
     color: #fff;
+    cursor: pointer;
+    user-select: none;
   }
   a {
     color: #fff;

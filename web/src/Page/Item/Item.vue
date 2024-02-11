@@ -31,6 +31,9 @@ onMounted(async () => {
 </script>
 
 <template>
+  <div v-if="!imgList[0]" class="spin">
+    <a-spin size="large" />
+  </div>
   <a-flex wrap="wrap" gap="small" justify="center" align="center">
     <a-image-preview-group>
       <a-image
@@ -44,3 +47,12 @@ onMounted(async () => {
     </a-image-preview-group>
   </a-flex>
 </template>
+
+<style scoped lang="less">
+.spin {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
